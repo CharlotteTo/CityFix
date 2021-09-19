@@ -12,6 +12,9 @@
     max-width: fit-content;
     padding: 33px;
     border-radius: 2%;
+
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .form-group{
