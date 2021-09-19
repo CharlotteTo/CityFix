@@ -1,0 +1,21 @@
+.yes-button{
+    padding: 10px 35px;
+    background-color: #0094FF;
+}
+
+.retake-button{
+    padding: 10px 35px;
+    margin: 0px 0px 0px 20px;
+    background-color: #2581C3;
+}
+
+h3{
+    font-family: 'Roboto',sans-serif;
+    text-align: left;
+}
+
+.forms{
+    font-family: 'Roboto',sans-serif;
+    font-size: 17px;
+    margin-left: px;
+}

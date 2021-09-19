@@ -1,0 +1,25 @@
+
+#form{
+    display: flex;
+    align-items: center;
+
+    justify-content: center;
+    flex-direction: column;
+
+    margin:30px;
+    border:1px solid;
+
+    max-width: fit-content;
+    padding: 33px;
+    border-radius: 2%;
+}
+
+.form-group{
+    min-width: 300px;
+    margin:20px
+}
+.btn{
+    min-width: 300px;
+    margin:20px;
+    margin-top: 10px;
+}

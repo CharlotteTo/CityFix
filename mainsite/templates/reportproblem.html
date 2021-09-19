@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles/styleUP.css">
+    <link rel="stylesheet" href="styles/styleShared.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Upload Picture</title>
+    
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'reportProblem.css' %}">
 </head>
 <body>
-    
+    <h3 id="Header">Do you want to upload this photo?</h3>
+    <img class="litter-img" src=".//images/image.png" alt="">
+    <div class="button-container">
+        <button class="yes-button">YES</button>
+        <button class="retake-button">Retake</button>
+    </div>
+
+    <!-- Form -->
+    <div class="forms">
+        <h3>Severity:</h3>
+        <select name="" id="">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+
+          </select>
+        <!-- Problem Form -->
+        <h3>Problem:</h3>
+        <input type="radio" id="road_kill" name="Problem" value="road_kill">
+        <label for="road_kill">Road Kill</label><br>
+        <input type="radio" id="litter" name="Problem" value="litter">
+        <label for="litter">Litter</label><br>
+        <input type="radio" id="broken" name="Problem" value="broken">
+        <label for="broken">Broken Infrastructure</label><br>
+        <input type="radio" id="other" name="Problem" value="other">
+        <label for="other">Other</label>
+    </div>
+
+    <h3>Add Title *</h3>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <h3>Add Description</h3>
+    <textarea name="" id="" cols="30" rows="10"></textarea>
+
 </body>
 </html>
