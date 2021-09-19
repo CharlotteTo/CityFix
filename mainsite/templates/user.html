@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="container">
+  <div class="row my-4">
+    <div class="col-md-2">
+        <img src="{{ userinfo.profilepic }}" width="100%">
+    </div>
+    <div class="col-md-2">
+        <h3>{{ userinfo.username }}</h3>
+        <p>{{ userinfo.first_name }} {{ userinfo.last_name }}</p>
+        <br>
+        <p>{{userinfo.description}}</p>
+        <br>
+    </div>
+
+  {%if request.user.id == userinfo.id%}
+   <a href = '/editprofile'> Edit profile </a>
+  {%endif%}
+
+</div>
+
+
+{% endblock %}

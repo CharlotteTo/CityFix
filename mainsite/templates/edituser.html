@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h1>Edit user profile </h1>
+<form action="{% url 'editprofile' %}" method="post">
+  {% csrf_token %}
+  <div class="form-group">
+      <input class="form-control" autofocus type="text" name="description" value="{{user1.description}}">
+  </div>
+  <div class="form-group">
+      <input class="form-control" type="text" name="pfp" value="{{user1.profilepic}}">
+  </div>
+
+  <input class="btn btn-primary" type="submit" value="Submit">
+</form>
+
+
+
+{% endblock %}
