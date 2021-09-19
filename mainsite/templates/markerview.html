@@ -15,23 +15,14 @@
     <title>View Marker</title>
 </head>
 <body>
-    <h1 id="locationHeader">Cummer Park</h1>
-    <img src="./images/image.png" alt="litter2" class="litter-img">
-    <div class="button-container">
-        <button>Still There</button>
-    </div>
+    <h1 id="title">{{problem.title}}</h1>
+    <img src="data:image/png;base64,{{problem.image}}" alt="litter2" class="litter-img">
     
-    <p class="confirmations">4 confirmations<br>Last updated: 09/16/2021</p>
-
-    <div class="button-container">
-        <button>Cleaned Up</button>
-    </div>
-    <p class="confirmations">1 confirmations<br>Last updated: 09/18/2021</p>
-        
+    
     <div class="info">    
-        <h3 id="type">Type: Litter</h3>
-        <h3 id="description">Description: Near the benches</h3>
-        <h3 id="severity">Severity: 2</h3>
+        <h3 id="type">Type: {{problem.type}}</h3>
+        <h3 id="description">description: {{problem.description}}</h3>
+        <h3 id="severity">Severity: {{problem.severity}}</h3>
     </div>
     
 </body>

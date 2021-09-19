@@ -17,18 +17,23 @@ class SiteUser(AbstractUser):
         }
 class ReportedProblem(models.Model):
     user = models.ForeignKey(SiteUser, on_delete=models.CASCADE)
-    title = models.TextField(),
-    description = models.TextField(),
-    problemtype = models.TextField(),
-    Severity = models.IntegerField(),
-    image = models.TextField(),#image is in b64 representation, easier to use than filefilelds
-    latitude = models.FloatField(),
-    longitude = models.FloatField(),
-    stillthereusers = models.TextField(null=True, blank=True),
-    cleanedupusers = models.TextField(null=True, blank=True)
+    title = models.TextField()
+    description = models.TextField()
+    problemtype = models.TextField()
+    Severity = models.IntegerField()
+    image = models.TextField()
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     def getinfo(self):
         return{
       
             "id":self.id,
-            "title":self.title
+            "title":self.title,
+            "description":self.description,
+            "problemtype":self.problemtype,
+            "severity": self.Severity,
+            "lat": self.latitude,
+            "lng":self.longitude,
+            "image":self.image,
+            'type': self.problemtype
         }

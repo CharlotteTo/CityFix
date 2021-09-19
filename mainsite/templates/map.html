@@ -1,97 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Display a popup on click</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'map.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+    <style>
+        #mapid {
+            width: 1200px;
+            height: 800px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Click the markers for more information</h1>
-<div id="map"></div>
-    <button>I found a problem</button>
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmxvdHRldDEyMyIsImEiOiJja3RxZDh5YmIwdWt0Mm9wMzd5bzhyMTFzIn0.7-lq_wlDQhu26hxcV3WaUA';
-const map = new mapboxgl.Map({
-container: 'map',
-style: 'mapbox://styles/mapbox/streets-v11',
-center: [-77.04, 38.907],
-zoom: 11.15
-});
- 
-map.on('load', () => {
-map.addSource('places', {
-// This GeoJSON contains features that include an "icon"
-// property. The value of the "icon" property corresponds
-// to an image in the Mapbox Streets style's sprite.
-'type': 'geojson',
-'data': {
-'type': 'FeatureCollection',
-'features': [
-{
-'type': 'Feature',
-'properties': {
-'description':
-'<p>Pile of litter next to the bench.</p> <button>Still There</button> <button>Removed</button>',
-'icon': 'rocket-15'
-},
-'geometry': {
-'type': 'Point',
-'coordinates': [-77.111561, 38.882342]
-}
-}
-]
-}
-});
-// Add a layer showing the places.
-map.addLayer({
-'id': 'places',
-'type': 'symbol',
-'source': 'places',
-'layout': {
-'icon-image': '{icon}',
-'icon-allow-overlap': true
-}
-});
- 
-// When a click event occurs on a feature in the places layer, open a popup at the
-// location of the feature, with description HTML from its properties.
-map.on('click', 'places', (e) => {
-// Copy coordinates array.
-const coordinates = e.features[0].geometry.coordinates.slice();
-const description = e.features[0].properties.description;
- 
-// Ensure that if the map is zoomed out such that multiple
-// copies of the feature are visible, the popup appears
-// over the copy being pointed to.
-while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-}
- 
-new mapboxgl.Popup()
-.setLngLat(coordinates)
-.setHTML(description)
-.addTo(map);
-});
- 
-// Change the cursor to a pointer when the mouse is over the places layer.
-map.on('mouseenter', 'places', () => {
-map.getCanvas().style.cursor = 'pointer';
-});
- 
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'places', () => {
-map.getCanvas().style.cursor = '';
-});
-});
-</script>
- 
+    <a href='/reportproblem'>Report a problem</a>
+    <div id="mapid"></div>
+
+
+    <script>
+        var problems = JSON.parse("{{ problems }}".replace(/&#x27;/g,'"'))
+
+        var map = L.map('mapid').setView([43.6532, -79.3832], 9);
+      
+        L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 28,
+            tileSize: 256,
+            //zoomOffset: -1,
+            //accessToken: 'pk.eyJ1IjoiYW1vbHZlbiIsImEiOiJjanFpOTh3cXYwNXdvNDNvMjFvaGwzMG01In0.5ci2HOqLpNJFz3ZNxYHK-w'
+        }).addTo(map);
+        Object.keys(problems).forEach(function(key) {
+        addmarker(problems[key]['lat'], problems[key]['lng'], problems[key]['title'], problems[key]['id'], problems[key]['severity'])
+         });
+        function addmarker(lat, lng, title, id, severity){
+        var marker = L.marker([lat, lng]).addTo(map);
+        var popup = marker.bindPopup(title + '<br></br>' + '<a href="/marker/'+id + '"> view this report </a>'  );
+        }
+    
+
+    </script>
 </body>
-</html>
-
-
-
-</html>

@@ -8,6 +8,7 @@ urlpatterns = [
     path("login/", views.login_view, name="login"),
     path("register/", views.register, name="register"),
     path('map/', views.map, name="map"),
+    path('reportproblem/', views.reportproblem, name="reportproblem"),
     path('marker/<str:problemid>', views.viewmarker, name='viewmarker')
 
 ]

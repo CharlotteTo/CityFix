@@ -87,7 +87,6 @@ def reportproblem(request):
         desc = response[4]
         ptype = response[5]
         severity = int(response[6])
-        print(title, lat, lng, desc, ptype, severity)
         a = ReportedProblem(user=request.user)
         a.title = title
         a.latitude = lat
@@ -96,7 +95,6 @@ def reportproblem(request):
         a.image = imageb64
         a.problemtype = ptype
         a.Severity = severity
-        print(a)
         a.save()
 
 @login_required

@@ -28,11 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 STATICFILES_DIRS = [
-    "/Users/charlotte/Downloads/cityfix/mainsite/static"
+    BASE_DIR / "static",
 ]
-
 # Application definition
 
 INSTALLED_APPS = [
