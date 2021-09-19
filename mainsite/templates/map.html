@@ -1,25 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>home</title>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
-
-
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styleShared.css' %}">
-
+<meta charset="utf-8">
+<title>Display a popup on click</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js"></script>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'map.css' %}">
 </head>
 <body>
-    <h1>hello</h1>
-    <div id="map"></div>
-
-    
-</body>
-
+    <h1>Click the markers for more information</h1>
+<div id="map"></div>
+    <button>I found a problem</button>
 <script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmxvdHRldDEyMyIsImEiOiJja3RxZDh5YmIwdWt0Mm9wMzd5bzhyMTFzIn0.7-lq_wlDQhu26hxcV3WaUA';
 const map = new mapboxgl.Map({
@@ -42,12 +35,12 @@ map.addSource('places', {
 'type': 'Feature',
 'properties': {
 'description':
-'blablabla',
-'icon': 'theatre-15'        
+'<p>Pile of litter next to the bench.</p> <button>Still There</button> <button>Removed</button>',
+'icon': 'rocket-15'
 },
 'geometry': {
 'type': 'Point',
-'coordinates': [-77.038659, 38.931567]
+'coordinates': [-77.111561, 38.882342]
 }
 }
 ]
@@ -95,6 +88,10 @@ map.getCanvas().style.cursor = '';
 });
 });
 </script>
+ 
+</body>
+</html>
+
 
 
 </html>

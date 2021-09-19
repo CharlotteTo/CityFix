@@ -74,20 +74,30 @@ def viewmarker(request, problemid):
     return render(request, 'markerview.html', {'problem':marker})
 
 @login_required
-def reportproblme(request):
+@csrf_exempt
+def reportproblem(request):
     if request.method == 'GET':
         return render(request, 'reportproblem.html')
     elif request.method == 'POST':
-        imageb64 = 'e' #gets a string from a front end with an xhmhttprequest
-        lat = 0.0 # gets float from front end
-        lng = 0.0 # gets float from front end
-        title = request.POST['title']
-        desc = request.POST['desc']
-        ptype = request.POST['ptype']
-        severity = request.POST['severity']
-        ReportedProblem.objects.create(user=request.user, title=title, descripton=desc, problemtype=ptype, Severity=severity, latitude=lat, longitude=lng, inage=imageb64)
-
-        
+        response = str(request.body).split(',sugoma,')
+        imageb64 = response[0].split(',')[1]
+        title = response[1]
+        lat = float(response[2]) # gets float from front end
+        lng = float(response[3]) # gets float from front end
+        desc = response[4]
+        ptype = response[5]
+        severity = int(response[6])
+        print(title, lat, lng, desc, ptype, severity)
+        a = ReportedProblem(user=request.user)
+        a.title = title
+        a.latitude = lat
+        a.longitude = lng
+        a.description = desc
+        a.image = imageb64
+        a.problemtype = ptype
+        a.Severity = severity
+        print(a)
+        a.save()
 
 @login_required
 def delete(request, problemid):
